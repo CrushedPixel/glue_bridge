@@ -106,17 +106,23 @@ func (b *GlueBridge) handleConnectingSocket(socket *glue.Socket) {
 		return
 	}
 
-	var header map[string]string
-	err = json.Unmarshal([]byte(message), &header)
+	var payload map[string]string
+	err = json.Unmarshal([]byte(message), &payload)
 	if err != nil {
 		// connection payload was invalid
 		socket.Close()
 	}
 
+	// convert parsed header object into map[string][]string
+	header := make(map[string][]string)
+	for key, val := range payload {
+		header[key] = []string{val}
+	}
+
 	// handle connection request
 	cr := &ferry.ConnectionRequest{
 		RemoteAddr: socket.RemoteAddr(),
-		Header:     nil,
+		Header:     header,
 	}
 	conn, res := b.ferry.NewConnection(cr)
 	if res != nil {
@@ -130,8 +136,8 @@ func (b *GlueBridge) handleConnectingSocket(socket *glue.Socket) {
 }
 
 func (b *GlueBridge) initSocketConnection(socket *glue.Socket, conn *ferry.Connection) {
-	requestChannel := socket.Channel(glueMainChannelName)
-	requestChannel.OnRead(cement.Glue(requestChannel, b.onRequest(conn)))
+	mainChannel := socket.Channel(glueMainChannelName)
+	mainChannel.OnRead(cement.Glue(mainChannel, b.onRequest(conn)))
 }
 
 func (b *GlueBridge) onRequest(conn *ferry.Connection) cement.OnReadFunc {
@@ -143,13 +149,9 @@ func (b *GlueBridge) onRequest(conn *ferry.Connection) cement.OnReadFunc {
 			return cement.CodeError, cement.MsgInvalidPayload
 		}
 
-		// get URI relative to namespace
-		// by removing namespace prefix
-		relativeURI := payload.Path[len(b.namespace):]
-
 		req := &ferry.Request{
 			Method:     payload.Method,
-			RequestURI: relativeURI,
+			RequestURI: payload.Path,
 			Payload:    strings.NewReader(payload.Payload),
 		}
 
