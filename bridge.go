@@ -160,10 +160,11 @@ func (b *GlueBridge) onRequest(conn *ferry.Connection) cement.OnReadFunc {
 	}
 }
 
-func marshalResponse(res *ferry.Response) string {
+func marshalResponse(res ferry.Response) string {
+	s, p := res.Response()
 	payload := &responsePayload{
-		Status:  res.Status,
-		Payload: res.Payload,
+		Status:  s,
+		Payload: p,
 	}
 
 	b, err := json.Marshal(payload)
