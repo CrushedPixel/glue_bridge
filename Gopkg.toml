@@ -1,0 +1,19 @@
+[[constraint]]
+  branch = "master"
+  name = "github.com/crushedpixel/cement"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/crushedpixel/ferry"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/crushedpixel/http_bridge"
+
+[[constraint]]
+  name = "github.com/desertbit/glue"
+  version = "1.9.1"
+
+[prune]
+  go-tests = true
+  unused-packages = true
