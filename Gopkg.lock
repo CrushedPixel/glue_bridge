@@ -2,12 +2,6 @@
 
 
 [[projects]]
-  name = "github.com/Sirupsen/logrus"
-  packages = ["."]
-  revision = "d682213848ed68c0a260ca37d6dd5ace8423f5ba"
-  version = "v1.0.4"
-
-[[projects]]
   name = "github.com/blang/semver"
   packages = ["."]
   revision = "2ee87856327ba09384cabd113bc6b5d174e9ec0f"
@@ -29,9 +23,10 @@
   branch = "master"
   name = "github.com/crushedpixel/http_bridge"
   packages = ["."]
-  revision = "a176017847822652472554aede21db81f842f49c"
+  revision = "6786d003c79c07a724242463cd6ccd0f6e5593e4"
 
 [[projects]]
+  branch = "master"
   name = "github.com/desertbit/glue"
   packages = [
     ".",
@@ -43,8 +38,7 @@
     "log",
     "utils"
   ]
-  revision = "a9786adb7e2ca6cdecbcf2bbfadd8a8bdbd9c5a7"
-  version = "1.9.1"
+  revision = "09c14070c2b18be76289ee6e7745772d39377776"
 
 [[projects]]
   name = "github.com/gorilla/context"
@@ -65,10 +59,16 @@
   version = "v1.2.0"
 
 [[projects]]
+  name = "github.com/sirupsen/logrus"
+  packages = ["."]
+  revision = "d682213848ed68c0a260ca37d6dd5ace8423f5ba"
+  version = "v1.0.4"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "650f4a345ab4e5b245a3034b110ebc7299e68186"
+  revision = "432090b8f568c018896cd8a0fb0345872bbac6ce"
 
 [[projects]]
   branch = "master"
@@ -82,6 +82,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "79b528268011d10617d8afd8659b4a88bce399aae00291585da0300643ae65f5"
+  inputs-digest = "2e42bf7f035e79db4e06341689f5e7fceee2d2c94a37530af71de59f34a77090"
   solver-name = "gps-cdcl"
   solver-version = 1
