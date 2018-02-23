@@ -149,7 +149,7 @@ func (b *GlueBridge) onRequest(conn *ferry.Connection) cement.OnReadFunc {
 			return cement.CodeError, cement.MsgInvalidPayload
 		}
 
-		req := &ferry.Request{
+		req := &ferry.IncomingRequest{
 			Method:     payload.Method,
 			RequestURI: payload.Path,
 			Payload:    strings.NewReader(payload.Payload),
